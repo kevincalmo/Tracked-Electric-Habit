@@ -2,7 +2,7 @@ import { PropsWithChildren } from "react";
 import Title from "../components/Title";
 import BottomNav from "../components/BottomNav";
 
-const Layout = ({ children }: { children: PropsWithChildren }) => {
+const Layout = ({ children }: { children: any }) => {
   return (
     <>
       <Title />
