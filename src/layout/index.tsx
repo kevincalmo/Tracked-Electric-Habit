@@ -1,11 +1,14 @@
 import Title from "../components/Title";
 import BottomNav from "../components/BottomNav";
+import { Box } from "@chakra-ui/react";
 
 const Layout = ({ children }: { children: any }) => {
   return (
     <>
       <Title />
-      {children}
+      <Box height="90vh" w="100%">
+        {children}
+      </Box>
       <BottomNav />
     </>
   );
