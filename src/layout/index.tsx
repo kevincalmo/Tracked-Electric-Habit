@@ -6,7 +6,7 @@ const Layout = ({ children }: { children: any }) => {
   return (
     <>
       <Title />
-      <Box height="90vh" w="100%">
+      <Box height="70vh" w="100%">
         {children}
       </Box>
       <BottomNav />
