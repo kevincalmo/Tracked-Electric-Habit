@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 import Layout from "./layout";
-import { Center, IconButton, Text } from "@chakra-ui/react";
+import { Button, Center, IconButton, Text } from "@chakra-ui/react";
 import axios from "axios";
 import { SUPABASE_API_KEY, SUPABASE_URL } from "./utils/env_variab";
 import { calculElectricInfo } from "./functions/calcul_electric_info";
@@ -12,20 +12,23 @@ import { useNavigate } from "react-router-dom";
 
 function App() {
   const navigate = useNavigate();
-  const { data, isLoading, error } = useQuery("data", async () => {
-    const dataFetch = await axios.get(SUPABASE_URL + "statement?select=*", {
-      headers: {
-        apikey: SUPABASE_API_KEY,
-        Authorization: `Bearer ${SUPABASE_API_KEY}`,
-      },
-    });
-    const returnData = dataFetch.data.map((data: any) => {
-      if (isDateInCurrentMonth(new Date(data.created_at))) {
-        return data;
-      }
-    });
-    return returnData;
-  });
+  const { data, isLoading, error, refetch }: any = useQuery(
+    "data",
+    async () => {
+      const dataFetch = await axios.get(SUPABASE_URL + "statement?select=*", {
+        headers: {
+          apikey: SUPABASE_API_KEY,
+          Authorization: `Bearer ${SUPABASE_API_KEY}`,
+        },
+      });
+      const returnData = dataFetch.data.map((data: any) => {
+        if (isDateInCurrentMonth(new Date(data.created_at))) {
+          return data;
+        }
+      });
+      return returnData;
+    }
+  );
 
   if (isLoading) {
     return <>Loading....</>;
@@ -55,6 +58,9 @@ function App() {
   return (
     <Layout>
       <Center flexDirection="column" h="100%" margin="20px 0">
+        <Button onClick={refetch} colorScheme="linkedin" margin="40px 0">
+          Rafraichir les données
+        </Button>
         <Text textAlign="center">Consommation du mois</Text>
         <Text textAlign="center">{electricConsommationOfMonth} kwH</Text>
         <Text textAlign="center">≈ {ElectricConsommationOfMonthInEuro} €</Text>
