@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 import Layout from "./layout";
-import { Button, Center, IconButton, Text } from "@chakra-ui/react";
+import { Button, Center, IconButton, Spinner, Text } from "@chakra-ui/react";
 import axios from "axios";
 import { SUPABASE_API_KEY, SUPABASE_URL } from "./utils/env_variab";
 import { calculElectricInfo } from "./functions/calcul_electric_info";
@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 function App() {
   const navigate = useNavigate();
-  const { data, isLoading, error, refetch }: any = useQuery(
+  const { data, isLoading, error, refetch, isFetching }: any = useQuery(
     "data",
     async () => {
       const dataFetch = await axios.get(SUPABASE_URL + "statement?select=*", {
@@ -39,6 +39,22 @@ function App() {
       <Center h="100%" w="100%">
         Une erreur est survenue lors du chargement des données
       </Center>
+    );
+  }
+
+  if (isFetching) {
+    return (
+      <Layout>
+        <Center height="100%">
+          <Spinner
+            thickness="4px"
+            speed="0.65s"
+            emptyColor="gray.200"
+            color="blue.500"
+            size="xl"
+          />
+        </Center>
+      </Layout>
     );
   }
 
