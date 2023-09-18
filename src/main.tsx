@@ -6,6 +6,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import AddStatement from "./pages/AddStatement.tsx";
+import Historique from "./pages/Historique.tsx";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
     path: "/add-statement",
     element: <AddStatement />,
   },
+  {
+    path: "/historique",
+    element: <Historique />
+  }
 ]);
 
 const client = new QueryClient();
