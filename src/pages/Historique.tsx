@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import Layout from "../layout";
 import {
   Button,
@@ -9,7 +8,6 @@ import {
   TableCaption,
   Tbody,
   Td,
-  Text,
   Th,
   Thead,
   Tr,
@@ -19,9 +17,8 @@ import { SUPABASE_API_KEY, SUPABASE_URL } from "../utils/env_variab";
 import { useMutation, useQuery } from "react-query";
 
 const Historique = () => {
-  const navigate = useNavigate();
 
-  const { data, isLoading, error, refetch, isFetching }: any = useQuery(
+  const { data, isLoading, error }: any = useQuery(
     "data",
     async () => {
       const dataFetch = await axios.get(
