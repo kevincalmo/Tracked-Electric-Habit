@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import AddStatement from "./pages/AddStatement.tsx";
 import Historique from "./pages/Historique.tsx";
+import Graphique from "./pages/Graphique.tsx";
 
 const router = createBrowserRouter([
   {
@@ -19,8 +20,12 @@ const router = createBrowserRouter([
   },
   {
     path: "/historique",
-    element: <Historique />
-  }
+    element: <Historique />,
+  },
+  {
+    path: "/graphique",
+    element: <Graphique />,
+  },
 ]);
 
 const client = new QueryClient();
